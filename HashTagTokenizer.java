@@ -49,7 +49,7 @@ public class HashTagTokenizer {
 			String firstWord = lHashtag.substring(0,i);
 			if (existInDictionary(firstWord, dictionary) == true) {
 				System.err.println(firstWord); 
-				breakHashTag(lHashtag.substring(i), dictionary);
+				breakHashTag(lHashtag.substring(i, N), dictionary);
 				return; 
 			}
 		}
