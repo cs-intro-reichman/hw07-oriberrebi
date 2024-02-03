@@ -48,7 +48,7 @@ public class HashTagTokenizer {
 		for (int i = 1; i <= N; i++) {
 			String firstWord = lHashtag.substring(0,i);
 			if (existInDictionary(firstWord, dictionary) == true) {
-				System.err.println(firstWord); 
+				System.out.println(firstWord); 
 				breakHashTag(lHashtag.substring(i, N), dictionary);
 				return; 
 			}
