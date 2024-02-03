@@ -27,7 +27,7 @@ public class HashTagTokenizer {
 		for (int i = 0; i < dictionary.length; i++) {
 			if (word.equals(dictionary[i])) {
 				inDic = true;
-				System.err.println(word);
+				// System.err.println(word);
 				break;
 			}
 		}
