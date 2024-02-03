@@ -68,11 +68,13 @@ public class SpellChecker {
 	public static String spellChecker(String word, int threshold, String[] dictionary) {
 		word = word.toLowerCase();
 		String wordF = word;
+		boolean found = false;
 		for (int i = 0; i < dictionary.length; i++) {
 			int thresh1 = levenshtein(word, dictionary[i]);
 			
-			if (thresh1 <= threshold) {
+			if ((!found && thresh1 <= threshold) || (found && thresh1 < threshold)) {
 				threshold = thresh1;
+				found = true;
 				wordF = dictionary[i];
 			}
 		}
