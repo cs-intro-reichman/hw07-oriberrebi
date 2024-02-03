@@ -11,11 +11,46 @@ public class SpellChecker {
 	}
 
 	public static String tail(String str) {
-		// Your code goes here
+		str = str.substring(1);
+
+		return str;
+	}
+
+	public static char head(String str) {
+		char strC = str.charAt(0);
+
+		return strC;
 	}
 
 	public static int levenshtein(String word1, String word2) {
-		// Your code goes here
+		word1 = word1.toLowerCase();
+		word2 = word2.toLowerCase();
+
+		int a = word1.length();
+		int b = word2.length();
+
+		if (a == 0) {
+			return b;
+		}
+
+		if (b == 0) {
+			return a; 
+		}
+
+		if (head(word1) == head(word2)) {
+			return levenshtein(tail(word1), tail(word2));
+		}
+
+		else {
+			int one = levenshtein(tail(word1), word2);
+			int two = levenshtein(word1, tail(word2));
+			int three = levenshtein (tail(word1), tail(word2));
+
+			int min = 1 + Math.min(one, Math.min(two, three));
+			return min; 
+
+		}
+
 	}
 
 	public static String[] readDictionary(String fileName) {
@@ -23,13 +58,26 @@ public class SpellChecker {
 
 		In in = new In(fileName);
 
-		// Your code here
+		for (int i = 0; i < dictionary.length; i++) {
+			dictionary[i] = in.readString();
+		}
 
 		return dictionary;
 	}
 
 	public static String spellChecker(String word, int threshold, String[] dictionary) {
-		// Your code goes here
+		word = word.toLowerCase();
+		String wordF = word;
+		boolean found = false;
+		for (int i = 0; i < dictionary.length; i++) {
+			int thresh1 = levenshtein(word, dictionary[i]);
+			
+			if ((!found && thresh1 <= threshold) || (found && thresh1 < threshold)) {
+				threshold = thresh1;
+				found = true;
+				wordF = dictionary[i];
+			}
+		}
+		return wordF;
 	}
-
 }
